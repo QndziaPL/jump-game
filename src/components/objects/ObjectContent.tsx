@@ -29,6 +29,7 @@ const ObjectContent: FC<Props> = ({ object }) => {
           display: "flex",
           width: width - OBJECT_PADDING,
           height: ROW_HEIGHT - OBJECT_PADDING,
+          borderRadius: 8,
           backgroundColor: colorByType(),
         }}
       ></div>
