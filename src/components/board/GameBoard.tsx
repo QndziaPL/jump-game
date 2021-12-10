@@ -8,10 +8,9 @@ const GameBoard = () => {
   const style: CSSProperties = {
     width: BOARD_WIDTH,
     height: BOARD_HEIGHT,
-    border: "5px groove ",
     borderColor: "rgba(203,0,0,0.67)",
   };
-  // const rockStyle: CSSProperties = {};
+
   return (
     <div style={style}>
       <FinishPlatform />
