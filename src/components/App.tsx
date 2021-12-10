@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FPS } from "../consts/main";
 import Frog from "./Frog";
-import { BoardRow } from "../types/board";
+import { generateMockRows } from "../helpers/helpers";
 
 const FPS_INTERVAL = 1000 / FPS;
 
@@ -9,7 +9,7 @@ const App = () => {
   const lastTimestamp = useRef(0);
   const [frame, setFrame] = useState(0);
 
-  const boardRows: BoardRow[] = [];
+  const mockRows = generateMockRows();
 
   const updateGame = () => {
     setFrame((prev) => prev + 1);
