@@ -9,11 +9,7 @@ const GameBoard = () => {
     borderColor: "rgba(203,0,0,0.67)",
   };
   // const rockStyle: CSSProperties = {};
-  return (
-    <div style={style}>
-      <div style={rockStyle}></div>
-    </div>
-  );
+  return <div style={style}>{/*<div style={rockStyle}></div>*/}</div>;
 };
 
 export default GameBoard;
