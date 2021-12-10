@@ -1,0 +1,7 @@
+const ROW_HEIGHT = 50;
+
+const START_HEIGHT = 100;
+
+const FINISH_HEIGHT = 100;
+
+export { ROW_HEIGHT, START_HEIGHT, FINISH_HEIGHT };
