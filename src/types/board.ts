@@ -1,6 +1,7 @@
 export interface BoardRow {
   objects: BoardObject[];
   index: number;
+  speed: number;
 }
 
 export interface BoardObject {

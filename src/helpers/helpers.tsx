@@ -1,4 +1,5 @@
 import { BoardObject, BoardRow, ObjectType } from "../types/board";
+import { ROW_SPEED } from "../consts/main";
 
 const generateSingleObjectsRow: () => BoardObject[] = () => {
   let minX = 0;
@@ -22,6 +23,9 @@ const generateMockRows: () => BoardRow[] = () => {
     rows.push({
       index: i,
       objects: generateSingleObjectsRow(),
+      speed:
+        Math.floor(Math.random() * ROW_SPEED.max - ROW_SPEED.min) +
+        ROW_SPEED.min,
     });
   }
   return rows;

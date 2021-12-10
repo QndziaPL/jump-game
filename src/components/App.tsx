@@ -1,22 +1,35 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FPS } from "../consts/main";
-import Frog from "./Frog";
 import { generateMockRows } from "../helpers/helpers";
-import { BoardRow } from "../types/board";
 import GameBoard from "./board/GameBoard";
+import { BoardObject } from "../types/board";
 
 const FPS_INTERVAL = 1000 / FPS;
-const mockRows = generateMockRows();
+// const mockRows = generateMockRows();
 
 const App = () => {
   const lastTimestamp = useRef(0);
   const [frame, setFrame] = useState(0);
+  const [rows, setRows] = useState(generateMockRows());
 
   const updateGame = () => {
-    setFrame((prev) => prev + 1);
+    // setFrame((prev) => prev + 1);
+    updateRows();
   };
 
-  const startGameLoop = useCallback((timestamp) => {
+  const updateRows = () => {
+    setRows((previousRows) =>
+      previousRows.map((row) => ({
+        ...row,
+        objects: moveObjects(row.objects, row.speed),
+      }))
+    );
+  };
+
+  const moveObjects = (objects: BoardObject[], speed: number) =>
+    objects.map((object) => ({ ...object, x: object.x - speed }));
+
+  const startGameLoop = (timestamp) => {
     //@ts-ignore
     const difference = timestamp - lastTimestamp.current;
     if (difference > FPS_INTERVAL) {
@@ -25,7 +38,7 @@ const App = () => {
     }
 
     requestAnimationFrame(startGameLoop);
-  }, []);
+  };
 
   useEffect(() => {
     startGameLoop(0);
@@ -33,7 +46,7 @@ const App = () => {
 
   return (
     <div>
-      <GameBoard rows={mockRows} />
+      <GameBoard rows={rows} />
     </div>
   );
 };
