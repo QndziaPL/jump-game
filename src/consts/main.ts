@@ -1,7 +1,7 @@
 const FPS = 60;
 const ROW_SPEED = {
-  min: 4,
-  max: 12,
+  min: 2,
+  max: 4,
 };
 
 export { FPS, ROW_SPEED };

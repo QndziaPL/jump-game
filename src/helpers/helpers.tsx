@@ -23,12 +23,13 @@ const generateMockRows: () => BoardRow[] = () => {
     rows.push({
       index: i,
       objects: generateSingleObjectsRow(),
-      speed:
-        Math.floor(Math.random() * ROW_SPEED.max - ROW_SPEED.min) +
-        ROW_SPEED.min,
+      speed: generateSpeed(ROW_SPEED.min, ROW_SPEED.max),
     });
   }
   return rows;
 };
+
+const generateSpeed = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
 
 export { generateMockRows };
