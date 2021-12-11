@@ -5,31 +5,59 @@ import { BOARD_WIDTH } from "../consts/board"
 const moveObjects = (objects: BoardObject[], speed: number) => {
   const newArray: BoardObject[] = []
   let pushNew = false
+
   objects.forEach((object) => {
-    if (object.x + object.width - speed > 0) {
-      newArray.push({ ...object, x: object.x - speed })
+    if (speed > 0) {
+      if (object.x + object.width - speed > 0) {
+        newArray.push({ ...object, x: object.x - speed })
+      } else {
+        pushNew = true
+      }
     } else {
-      pushNew = true
+      if (object.x - speed < BOARD_WIDTH) {
+        newArray.push({ ...object, x: object.x - speed })
+      } else {
+        pushNew = true
+      }
     }
   })
 
   if (pushNew) {
-    const lastObject = objects[objects.length - 1]
-    const minXPosition =
-      lastObject.x + lastObject.width + randomBreak() + randomWidth()
-    const finalPosition = () => {
-      if (minXPosition > BOARD_WIDTH) {
-        console.log(minXPosition)
-        return minXPosition
-      } else {
-        return BOARD_WIDTH
+    if (speed > 0) {
+      const lastObject = objects[objects.length - 1]
+      const minXPosition =
+        lastObject.x + lastObject.width + randomBreak() + randomWidth()
+      const finalPosition = () => {
+        if (minXPosition > BOARD_WIDTH) {
+          return minXPosition
+        } else {
+          return BOARD_WIDTH
+        }
       }
+      newArray.push({
+        x: finalPosition(),
+        width: randomWidth(),
+        type: ObjectType.DEFAULT,
+      })
+    } else {
+      const firstObject = objects[0]
+      const minXPosition =
+        firstObject.x - firstObject.width - randomBreak() - randomWidth()
+      console.log(minXPosition)
+      const width = randomWidth()
+      const finalPosition = () => {
+        if (minXPosition < 0) {
+          return minXPosition
+        } else {
+          return 0 - width
+        }
+      }
+      newArray.push({
+        x: finalPosition(),
+        width: width,
+        type: ObjectType.DEFAULT,
+      })
     }
-    newArray.push({
-      x: finalPosition(),
-      width: randomWidth(),
-      type: ObjectType.DEFAULT,
-    })
   }
 
   return newArray

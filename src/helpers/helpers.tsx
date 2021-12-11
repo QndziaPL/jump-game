@@ -8,7 +8,7 @@ const randomBreak = () => Math.floor(Math.random() * 150) + 50
 const generateSingleObjectsRow: () => BoardObject[] = () => {
   let minX = 0
 
-  const randomNumberOfObjects = Math.floor(Math.random() * 10)
+  const randomNumberOfObjects = Math.floor(Math.random() * 4) + 4
   const objects: BoardObject[] = []
   for (let i = 0; i < randomNumberOfObjects; i++) {
     const width = randomWidth()
@@ -21,15 +21,18 @@ const generateSingleObjectsRow: () => BoardObject[] = () => {
 
 const generateMockRows: () => BoardRow[] = () => {
   const rows: BoardRow[] = []
+
   for (let i = 0; i < 12; i++) {
     rows.push({
       index: i,
       objects: generateSingleObjectsRow(),
-      speed: generateSpeed(ROW_SPEED.min, ROW_SPEED.max),
+      speed: generateSpeed(ROW_SPEED.min, ROW_SPEED.max) * isNegative(i),
     })
   }
   return rows
 }
+
+const isNegative = (number) => (number % 2 === 0 ? -1 : 1)
 
 const generateSpeed = (min, max) =>
   Math.floor(Math.random() * (max - min + 1)) + min
