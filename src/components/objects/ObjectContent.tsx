@@ -1,20 +1,16 @@
-import React, { FC } from "react";
-import { BoardObject, ObjectType } from "../../types/board";
-import { OBJECT_PADDING } from "../../consts/objects";
-import { ROW_HEIGHT } from "../../consts/board";
+import React, { FC } from "react"
+import { BoardObject } from "../../types/board"
+import { OBJECT_PADDING } from "../../consts/objects"
+import { ROW_HEIGHT } from "../../consts/board"
+import wood from "../../images/wood.png"
 
 interface Props {
-  object: BoardObject;
+  object: BoardObject
 }
 
 const ObjectContent: FC<Props> = ({ object }) => {
-  const { width, x, type } = object;
-  const colorByType = () => {
-    switch (type) {
-      case ObjectType.DEFAULT:
-        return "#4d2929";
-    }
-  };
+  const { width } = object
+
   return (
     <div
       style={{
@@ -24,17 +20,19 @@ const ObjectContent: FC<Props> = ({ object }) => {
         alignItems: "center",
       }}
     >
-      <div
+      <img
+        src={wood}
         style={{
-          display: "flex",
           width: width - OBJECT_PADDING,
           height: ROW_HEIGHT - OBJECT_PADDING,
-          borderRadius: 8,
-          backgroundColor: colorByType(),
+          borderRadius: 12,
+          border: "1px solid rgba(1, 1, 1, 0.5)",
+          boxShadow: "4px 4px 4px rgba(1,1,1, 0.5)",
         }}
-      ></div>
+        alt=""
+      />
     </div>
-  );
-};
+  )
+}
 
-export default ObjectContent;
+export default ObjectContent
