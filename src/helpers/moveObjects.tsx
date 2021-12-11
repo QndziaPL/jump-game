@@ -40,10 +40,9 @@ const moveObjects = (objects: BoardObject[], speed: number) => {
         type: ObjectType.DEFAULT,
       })
     } else {
-      const firstObject = objects[0]
+      const firstObject = objects[objects.length - 1]
       const minXPosition =
         firstObject.x - firstObject.width - randomBreak() - randomWidth()
-      console.log(minXPosition)
       const width = randomWidth()
       const finalPosition = () => {
         if (minXPosition < 0) {
