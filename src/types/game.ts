@@ -4,4 +4,5 @@ import { BoardRow } from "./board"
 export interface GameState {
   player: PlayerObject
   rows: BoardRow[]
+  gameOver: boolean
 }
