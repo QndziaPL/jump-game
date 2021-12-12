@@ -6,12 +6,9 @@ import { GameState } from "../types/game"
 
 const audio = new Audio("resources/audio/pop.mp3")
 
-const movePlayer = (event, setGameState) => {
+const movePlayer = (event, setGameState, playMoveSound) => {
+  playMoveSound()
   const movePlayerObject = (direction: MoveDirection) => {
-    const sound = document.getElementsByTagName("audio")[0]
-    sound && sound.pause()
-    audio.play()
-
     switch (direction) {
       case MoveDirection.DOWN:
         setGameState((prevGameState: GameState) => ({

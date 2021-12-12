@@ -8,12 +8,16 @@ import { FINISH_HEIGHT, RIVER_AREA_RANGE, ROW_HEIGHT } from "../consts/board"
 import { GameState } from "../types/game"
 import { initialGameState } from "../helpers/game"
 import GameOverMenu from "./ui/GameOverMenu"
+import useSound from "use-sound"
+//@ts-ignore
+import moveSound from "../resources/audio/pop.mp3"
 
 const FPS_INTERVAL = 1000 / FPS
 
 const App = () => {
   const lastTimestamp = useRef(0)
   const [gameState, setGameState] = useState<GameState>(initialGameState)
+  const [playMoveSound] = useSound(moveSound)
 
   const updateGame = () => {
     setGameState((previousGameState) => {
@@ -64,12 +68,12 @@ const App = () => {
     startGameLoop(0)
 
     window.addEventListener("keydown", (event) =>
-      movePlayer(event, setGameState)
+      movePlayer(event, setGameState, playMoveSound)
     )
 
     return () =>
       window.removeEventListener("keydown", (event) =>
-        movePlayer(event, setGameState)
+        movePlayer(event, setGameState, playMoveSound)
       )
   }, [])
 
