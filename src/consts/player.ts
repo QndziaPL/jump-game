@@ -6,7 +6,7 @@ const INITIAL_PLAYER: PlayerObject = {
   y: BOARD_HEIGHT - START_HEIGHT / 2,
 }
 
-const PLAYER_HITBOX = 20
+const PLAYER_HITBOX = 40
 
 const PLAYER_HORIZONTAL_SPEED = 30
 

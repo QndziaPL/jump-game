@@ -4,8 +4,14 @@ import { ROW_HEIGHT } from "../consts/board"
 import { BoardObject } from "../types/board"
 import { GameState } from "../types/game"
 
+const audio = new Audio("resources/audio/pop.mp3")
+
 const movePlayer = (event, setGameState) => {
   const movePlayerObject = (direction: MoveDirection) => {
+    const sound = document.getElementsByTagName("audio")[0]
+    sound && sound.pause()
+    audio.play()
+
     switch (direction) {
       case MoveDirection.DOWN:
         setGameState((prevGameState: GameState) => ({
