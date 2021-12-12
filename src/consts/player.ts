@@ -1,5 +1,5 @@
 import { PlayerObject } from "../types/player"
-import { BOARD_HEIGHT, BOARD_WIDTH, ROW_HEIGHT, START_HEIGHT } from "./board"
+import { BOARD_HEIGHT, BOARD_WIDTH, START_HEIGHT } from "./board"
 
 const INITIAL_PLAYER: PlayerObject = {
   x: BOARD_WIDTH / 2,
