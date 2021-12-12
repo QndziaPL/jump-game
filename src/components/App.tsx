@@ -6,7 +6,7 @@ import { moveObjects } from "../helpers/moveObjects"
 import Player from "./player/Player"
 import { PlayerObject } from "../types/player"
 import { INITIAL_PLAYER } from "../consts/player"
-import { movePlayer } from "../helpers/movePlayer"
+import { checkIfOnObject, movePlayer } from "../helpers/movePlayer"
 import {
   BOARD_HEIGHT,
   FINISH_HEIGHT,
@@ -14,6 +14,7 @@ import {
   ROW_HEIGHT,
   START_HEIGHT,
 } from "../consts/board"
+import { GameState } from "../types/game"
 
 const FPS_INTERVAL = 1000 / FPS
 
@@ -21,10 +22,14 @@ const App = () => {
   const lastTimestamp = useRef(0)
   const [rows, setRows] = useState(generateMockRows())
   const [player, setPlayer] = useState<PlayerObject>(INITIAL_PLAYER)
+  const [gameState, setGameState] = useState<GameState>({
+    rows: generateMockRows(),
+    player: INITIAL_PLAYER,
+  })
 
   const updateGame = () => {
-    updateRows()
     updatePlayer()
+    updateRows()
   }
 
   const updateRows = () => {
@@ -39,15 +44,18 @@ const App = () => {
   const updatePlayer = () => {
     setPlayer((prev) => {
       const { x, y } = prev
-      console.log(`x:${x}, y:${y}`)
+      // console.log(`x:${x}, y:${y}`)
 
       /** players enters river */
-      if (y < RIVER_AREA_RANGE.max && y > RIVER_AREA_RANGE.min) {
+      if (y < RIVER_AREA_RANGE.max && y >= RIVER_AREA_RANGE.min) {
         const row =
           y - FINISH_HEIGHT === 0 ? 0 : (y - FINISH_HEIGHT) / ROW_HEIGHT
 
-        console.log(`row: ${row + 1}`)
-        return { ...prev }
+        const { objects, speed } = rows[row]
+        const onObject = checkIfOnObject(objects, x)
+        console.log(objects, "obiekty")
+        console.log(onObject, "na obiekcie")
+        return { ...prev, x: x - speed }
       } else {
         return prev
       }

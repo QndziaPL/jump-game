@@ -1,6 +1,7 @@
 import { MoveDirection } from "../types/player"
-import { PLAYER_HORIZONTAL_SPEED } from "../consts/player"
+import { PLAYER_HITBOX, PLAYER_HORIZONTAL_SPEED } from "../consts/player"
 import { ROW_HEIGHT } from "../consts/board"
+import { BoardObject } from "../types/board"
 
 const movePlayer = (event, setPlayer) => {
   const movePlayerObject = (direction: MoveDirection) => {
@@ -36,4 +37,14 @@ const movePlayer = (event, setPlayer) => {
   }
 }
 
-export { movePlayer }
+const centerOfPlayer = (playerX) => playerX + PLAYER_HITBOX / 2
+
+const checkIfOnObject = (objects: BoardObject[], playerX: number) => {
+  console.log(centerOfPlayer(playerX))
+  return objects.some(
+    ({ x, width }) =>
+      centerOfPlayer(playerX) <= x + width && centerOfPlayer(playerX) >= x
+  )
+}
+
+export { movePlayer, checkIfOnObject }
