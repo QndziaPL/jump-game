@@ -10,14 +10,17 @@ const Player: FC<Props> = ({ player: { y, x } }) => {
     <div
       style={{
         display: "flex",
-        width: 60,
-        height: 60,
+        // width: 60,
+        // height: 60,
         position: "absolute",
         top: y,
         left: x,
       }}
     >
-      <img src={dupa} alt="" />
+      {/*<img src={dupa} alt="" />*/}
+      <div style={{
+        // position: "absolute",
+        display: "flex", border: "3px solid yellow", top: y, left: x}}></div>
     </div>
   )
 }

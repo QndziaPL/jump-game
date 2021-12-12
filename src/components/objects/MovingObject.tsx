@@ -15,8 +15,6 @@ const MovingObject: FC<Props> = ({ object }) => {
     left: x,
     height: ROW_HEIGHT,
     width,
-
-    // border: "1px solid black",
   };
   return (
     <div style={style}>

@@ -1,5 +1,6 @@
 import { BoardObject, BoardRow, ObjectType } from "../types/board"
 import { ROW_SPEED } from "../consts/main"
+import { NUMBER_OF_ROWS } from "../consts/board"
 
 // probably will be good to extract those fixed numbers to shared consts
 const randomWidth = () => Math.floor(Math.random() * 150) + 50
@@ -22,7 +23,7 @@ const generateSingleObjectsRow: () => BoardObject[] = () => {
 const generateMockRows: () => BoardRow[] = () => {
   const rows: BoardRow[] = []
 
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < NUMBER_OF_ROWS; i++) {
     rows.push({
       index: i,
       objects: generateSingleObjectsRow(),
