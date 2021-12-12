@@ -2,21 +2,46 @@ import { MoveDirection } from "../types/player"
 import { PLAYER_HITBOX, PLAYER_HORIZONTAL_SPEED } from "../consts/player"
 import { ROW_HEIGHT } from "../consts/board"
 import { BoardObject } from "../types/board"
+import { GameState } from "../types/game"
 
-const movePlayer = (event, setPlayer) => {
+const movePlayer = (event, setGameState) => {
   const movePlayerObject = (direction: MoveDirection) => {
     switch (direction) {
       case MoveDirection.DOWN:
-        setPlayer((prev) => ({ ...prev, y: prev.y + ROW_HEIGHT }))
+        setGameState((prevGameState: GameState) => ({
+          ...prevGameState,
+          player: {
+            ...prevGameState.player,
+            y: prevGameState.player.y + ROW_HEIGHT,
+          },
+        }))
         return
       case MoveDirection.TOP:
-        setPlayer((prev) => ({ ...prev, y: prev.y - ROW_HEIGHT }))
+        setGameState((prevGameState: GameState) => ({
+          ...prevGameState,
+          player: {
+            ...prevGameState.player,
+            y: prevGameState.player.y - ROW_HEIGHT,
+          },
+        }))
         return
       case MoveDirection.LEFT:
-        setPlayer((prev) => ({ ...prev, x: prev.x - PLAYER_HORIZONTAL_SPEED }))
+        setGameState((prevGameState: GameState) => ({
+          ...prevGameState,
+          player: {
+            ...prevGameState.player,
+            x: prevGameState.player.x - PLAYER_HORIZONTAL_SPEED,
+          },
+        }))
         return
       case MoveDirection.RIGHT:
-        setPlayer((prev) => ({ ...prev, x: prev.x + PLAYER_HORIZONTAL_SPEED }))
+        setGameState((prevGameState: GameState) => ({
+          ...prevGameState,
+          player: {
+            ...prevGameState.player,
+            x: prevGameState.player.x + PLAYER_HORIZONTAL_SPEED,
+          },
+        }))
         return
     }
   }
