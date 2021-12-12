@@ -9,7 +9,7 @@ const randomBreak = () => Math.floor(Math.random() * 150) + 50
 const generateSingleObjectsRow: () => BoardObject[] = () => {
   let minX = 0
 
-  const randomNumberOfObjects = Math.floor(Math.random() * 4) + 4
+  const randomNumberOfObjects = Math.floor(Math.random() * 4) + 2
   const objects: BoardObject[] = []
   for (let i = 0; i < randomNumberOfObjects; i++) {
     const width = randomWidth()
