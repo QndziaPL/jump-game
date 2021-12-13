@@ -1,5 +1,5 @@
 import { BoardObject, ObjectType } from "../types/board"
-import { randomBreak, randomWidth } from "./helpers"
+import { randomBreak, randomInRange, randomWidth } from "./helpers"
 import { BOARD_WIDTH } from "../consts/board"
 
 const moveObjects = (objects: BoardObject[], speed: number) => {
@@ -38,6 +38,7 @@ const moveObjects = (objects: BoardObject[], speed: number) => {
         x: finalPosition(),
         width: randomWidth(),
         type: ObjectType.DEFAULT,
+        backgroundRotation: randomInRange(0, 1) === 1,
       })
     } else {
       const firstObject = objects[objects.length - 1]
@@ -55,6 +56,7 @@ const moveObjects = (objects: BoardObject[], speed: number) => {
         x: finalPosition(),
         width: width,
         type: ObjectType.DEFAULT,
+        backgroundRotation: randomInRange(0, 1) === 1,
       })
     }
   }

@@ -1,10 +1,10 @@
 import { BoardObject, BoardRow, ObjectType } from "../types/board"
 import { ROW_SPEED } from "../consts/main"
 import { NUMBER_OF_ROWS } from "../consts/board"
+import { OBJECT_WIDTH } from "../consts/objects"
 
-// probably will be good to extract those fixed numbers to shared consts
-const randomWidth = () => Math.floor(Math.random() * 150) + 50
-const randomBreak = () => Math.floor(Math.random() * 150) + 50
+const randomWidth = () => randomInRange(OBJECT_WIDTH.min, OBJECT_WIDTH.max)
+const randomBreak = () => randomInRange(100, 400)
 
 const generateSingleObjectsRow: () => BoardObject[] = () => {
   let minX = 0
@@ -14,7 +14,12 @@ const generateSingleObjectsRow: () => BoardObject[] = () => {
   for (let i = 0; i < randomNumberOfObjects; i++) {
     const width = randomWidth()
     const breakSpace = randomBreak()
-    objects.push({ x: breakSpace + minX, type: ObjectType.DEFAULT, width })
+    objects.push({
+      x: breakSpace + minX,
+      type: ObjectType.DEFAULT,
+      width,
+      backgroundRotation: randomInRange(0, 1) === 1,
+    })
     minX += width + breakSpace
   }
   return objects
@@ -27,7 +32,7 @@ const generateMockRows: () => BoardRow[] = () => {
     rows.push({
       index: i,
       objects: generateSingleObjectsRow(),
-      speed: generateSpeed(ROW_SPEED.min, ROW_SPEED.max) * isNegative(i),
+      speed: randomInRange(ROW_SPEED.min, ROW_SPEED.max) * isNegative(i),
     })
   }
   return rows
@@ -35,7 +40,7 @@ const generateMockRows: () => BoardRow[] = () => {
 
 const isNegative = (number) => (number % 2 === 0 ? -1 : 1)
 
-const generateSpeed = (min, max) =>
-  Math.floor(Math.random() * (max - min + 1)) + min
+const randomInRange = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1) + min)
 
-export { generateMockRows, randomBreak, randomWidth }
+export { generateMockRows, randomBreak, randomWidth, randomInRange }
